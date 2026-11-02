@@ -1,322 +1,780 @@
 
-html = r'''<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Chetan Samra | DevOps & Azure Cloud Engineer portfolio" />
-  <title>Chetan Samra | DevOps & Azure Cloud Engineer</title>
-  <style>
-    :root {
-      --navy: #07152f;
-      --cyan: #08c9ee;
-      --blue: #4388ff;
-      --purple: #8b5cf6;
-      --green: #079b83;
-      --orange: #e77b08;
-      --ink: #18243a;
-      --muted: #64748b;
-      --line: #dbe4ef;
-      --surface: #f6f9ff;
-    }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
-    body {
-      margin: 0;
-      font-family: Inter, "Segoe UI", Arial, sans-serif;
-      color: var(--ink);
-      background: #fff;
-    }
-    .hero {
-      position: relative;
-      overflow: hidden;
-      min-height: 290px;
-      padding: 66px 20px 90px;
-      text-align: center;
-      color: white;
-      background: linear-gradient(115deg, #35d0ed 0%, #4388ff 100%);
-    }
-    .hero::before, .hero::after {
-      content: "";
-      position: absolute;
-      left: -5%;
-      width: 110%;
-      height: 80px;
-      bottom: -43px;
-      border-radius: 50% 50% 0 0;
-      background: rgba(255,255,255,.35);
-      transform: rotate(-2deg);
-    }
-    .hero::after {
-      bottom: -57px;
-      background: white;
-      transform: rotate(1.5deg);
-    }
-    .hero-inner { position: relative; z-index: 1; }
-    .hero h1 {
-      margin: 0;
-      font-size: clamp(2.6rem, 7vw, 4.5rem);
-      letter-spacing: -2px;
-      font-weight: 800;
-    }
-    .hero .role {
-      margin: 16px 0 0;
-      font-size: clamp(1rem, 2.8vw, 1.55rem);
-      font-weight: 650;
-    }
-    .hero .experience {
-      margin-top: 13px;
-      font-size: .98rem;
-      color: rgba(255,255,255,.92);
-      letter-spacing: .3px;
-    }
-    main { max-width: 1120px; margin: auto; padding: 38px 22px 60px; }
-    .intro { text-align: center; }
-    .intro h2 {
-      color: #00bfe9;
-      font-size: clamp(1.5rem, 4vw, 2.25rem);
-      margin: 0 0 16px;
-      font-weight: 750;
-    }
-    .tagline {
-      color: #9672f4;
-      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-      font-size: clamp(.9rem, 2vw, 1.15rem);
-      font-weight: 700;
-      letter-spacing: .5px;
-      margin: 0 0 30px;
-    }
-    .metrics {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin: 0 auto 34px;
-    }
-    .metric {
-      display: inline-flex;
-      align-items: center;
-      min-height: 43px;
-      background: var(--navy);
-      color: white;
-      text-transform: uppercase;
-      letter-spacing: 1.1px;
-      font-size: .78rem;
-      font-weight: 700;
-    }
-    .metric span { padding: 12px 16px; }
-    .metric strong { padding: 12px 17px; background: #0788ca; }
-    .metric:nth-child(2) strong { background: var(--green); }
-    .metric:nth-child(3) strong { background: var(--orange); }
-    .metric:nth-child(4) strong { background: #7938ed; }
-    .nav-pills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      border: 1px solid var(--line);
-      margin: 0 -22px 34px;
-      padding: 10px;
-      gap: 9px;
-      background: #fff;
-    }
-    .nav-pills a {
-      text-decoration: none;
-      color: white;
-      padding: 9px 13px;
-      font-size: .78rem;
-      font-weight: 700;
-      background: #087dbb;
-      transition: transform .2s, opacity .2s;
-    }
-    .nav-pills a:hover { transform: translateY(-3px); opacity: .88; }
-    .nav-pills a:nth-child(2) { background: #334155; }
-    .nav-pills a:nth-child(3) { background: #0d9488; }
-    .nav-pills a:nth-child(4) { background: #7c3aed; }
-    .nav-pills a:nth-child(5) { background: #e66b16; }
-    .nav-pills a:nth-child(6) { background: #2563eb; }
-    section { padding: 26px 0; scroll-margin-top: 20px; }
-    .section-title {
-      font-size: 1.55rem;
-      margin: 0 0 18px;
-      color: #087fbd;
-    }
-    .section-title::after {
-      content: "";
-      display: block;
-      width: 58px;
-      height: 4px;
-      border-radius: 4px;
-      margin-top: 9px;
-      background: linear-gradient(90deg, var(--cyan), var(--purple));
-    }
-    .about {
-      color: #475569;
-      line-height: 1.8;
-      max-width: 900px;
-    }
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 15px;
-    }
-    .card {
-      padding: 20px;
-      border: 1px solid var(--line);
-      border-radius: 13px;
-      background: linear-gradient(145deg, #fff, var(--surface));
-      box-shadow: 0 7px 22px rgba(15, 45, 85, .06);
-    }
-    .card h3 { margin: 0 0 9px; font-size: 1.05rem; color: #172554; }
-    .card p { margin: 0; color: var(--muted); line-height: 1.65; font-size: .93rem; }
-    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
-    .chip {
-      padding: 9px 13px;
-      border-radius: 7px;
-      color: #075985;
-      background: #e0f5ff;
-      border: 1px solid #b8e8fb;
-      font-size: .88rem;
-      font-weight: 650;
-    }
-    .contact {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      padding-top: 18px;
-    }
-    .contact a {
-      color: white;
-      background: #172033;
-      text-decoration: none;
-      padding: 11px 15px;
-      border-radius: 5px;
-      font-size: .9rem;
-      font-weight: 650;
-    }
-    .contact a:hover { background: #087fbd; }
-    footer {
-      text-align: center;
-      padding: 25px 15px;
-      color: #64748b;
-      background: #f1f6fc;
-      font-size: .88rem;
-    }
-    @media (max-width: 600px) {
-      .hero { min-height: 255px; padding-top: 55px; }
-      .metric { width: 100%; justify-content: space-between; }
-      .metric span, .metric strong { padding: 11px 12px; }
-      .nav-pills { margin-left: -22px; margin-right: -22px; }
-      .nav-pills a { flex: 1 1 42%; text-align: center; }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chetan Samra | Azure DevOps Engineer</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #ffffff;
+            color: #172033;
+        }
+
+        /* HERO SECTION */
+
+        .hero {
+            background: linear-gradient(120deg, #36d1ed, #4388ff);
+            color: white;
+            text-align: center;
+            padding: 65px 20px 90px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero h1 {
+            font-size: clamp(42px, 7vw, 68px);
+            font-weight: 800;
+            letter-spacing: -2px;
+        }
+
+        .hero h2 {
+            font-size: clamp(17px, 3vw, 27px);
+            margin-top: 15px;
+        }
+
+        .hero p {
+            margin-top: 15px;
+            font-size: 17px;
+        }
+
+        /* MAIN CONTENT */
+
+        .container {
+            max-width: 1150px;
+            margin: auto;
+            padding: 45px 20px;
+        }
+
+        .intro {
+            text-align: center;
+        }
+
+        .intro h2 {
+            color: #00bfe9;
+            font-size: clamp(25px, 4vw, 36px);
+            margin-bottom: 25px;
+        }
+
+        .tagline {
+            color: #9672f4;
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 35px;
+        }
+
+        /* METRICS */
+
+        .metrics {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 35px;
+        }
+
+        .metric {
+            display: flex;
+            background: #07152f;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 1px;
+            font-size: 13px;
+        }
+
+        .metric span {
+            padding: 13px 17px;
+        }
+
+        .metric strong {
+            padding: 13px 17px;
+            background: #0788ca;
+        }
+
+        .metric:nth-child(2) strong {
+            background: #079b83;
+        }
+
+        .metric:nth-child(3) strong {
+            background: #e77b08;
+        }
+
+        .metric:nth-child(4) strong {
+            background: #7938ed;
+        }
+
+        /* NAVIGATION */
+
+        .navigation {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px;
+            border: 1px solid #dbe4ef;
+        }
+
+        .navigation a {
+            color: white;
+            text-decoration: none;
+            padding: 11px 16px;
+            font-size: 13px;
+            font-weight: bold;
+            background: #087dbb;
+            transition: 0.3s;
+        }
+
+        .navigation a:hover {
+            transform: translateY(-4px);
+            opacity: 0.85;
+        }
+
+        .navigation a:nth-child(2) {
+            background: #334155;
+        }
+
+        .navigation a:nth-child(3) {
+            background: #0d9488;
+        }
+
+        .navigation a:nth-child(4) {
+            background: #7c3aed;
+        }
+
+        .navigation a:nth-child(5) {
+            background: #e66b16;
+        }
+
+        .navigation a:nth-child(6) {
+            background: #2563eb;
+        }
+
+        /* SECTION */
+
+        section {
+            padding: 35px 0;
+            scroll-margin-top: 20px;
+        }
+
+        .section-title {
+            color: #087fbd;
+            font-size: 27px;
+            margin-bottom: 22px;
+        }
+
+        .section-title::after {
+            content: "";
+            display: block;
+            width: 65px;
+            height: 4px;
+            margin-top: 10px;
+            background: linear-gradient(90deg, #08c9ee, #8b5cf6);
+        }
+
+        .about {
+            color: #64748b;
+            line-height: 1.9;
+            font-size: 16px;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            padding: 23px;
+            border: 1px solid #dbe4ef;
+            border-radius: 12px;
+            background: linear-gradient(145deg, #ffffff, #f2f7ff);
+            box-shadow: 0 7px 22px rgba(15,45,85,0.06);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 12px 28px rgba(15,45,85,0.13);
+        }
+
+        .card h3 {
+            color: #172554;
+            margin-bottom: 12px;
+            font-size: 19px;
+        }
+
+        .card p {
+            color: #64748b;
+            line-height: 1.7;
+            font-size: 14px;
+        }
+
+        /* SKILLS */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill {
+            background: #e0f5ff;
+            border: 1px solid #b8e8fb;
+            color: #075985;
+            padding: 11px 17px;
+            border-radius: 7px;
+            font-size: 14px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .skill:hover {
+            background: #087dbb;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        /* CONTACT */
+
+        .contact {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding: 30px 0;
+        }
+
+        .contact a {
+            text-decoration: none;
+            color: white;
+            background: #172033;
+            padding: 13px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .contact a:hover {
+            background: #087fbd;
+            transform: translateY(-3px);
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #f1f6fc;
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        @media(max-width: 600px) {
+            .hero {
+                padding: 50px 15px 70px;
+            }
+
+            .metric {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .metric span,
+            .metric strong {
+                padding: 12px;
+            }
+
+            .navigation a {
+                flex: 1 1 40%;
+                text-align: center;
+            }
+        }
+    </style>
 </head>
+
 <body>
-  <header class="hero">
-    <div class="hero-inner">
-      <h1>Chetan Samra</h1>
-      <p class="role">DevOps &amp; Azure Cloud Engineer • Infrastructure Automation</p>
-      <p class="experience">13 Years IT Experience&nbsp; | &nbsp;5+ Years DevOps &amp; Cloud</p>
+
+    <!-- HERO SECTION -->
+
+    <header class="hero">
+
+        <h1>Chetan Samra</h1>
+
+        <h2>
+            Senior DevOps & Azure Cloud Engineer
+        </h2>
+
+        <p>
+            13 Years IT Experience | 5+ Years DevOps & Cloud
+        </p>
+
+    </header>
+
+
+    <div class="container">
+
+        <!-- INTRO -->
+
+        <div class="intro">
+
+            <h2>
+                Enterprise Azure Cloud & DevOps Specialist
+            </h2>
+
+            <p class="tagline">
+                ▶ Automating Infrastructure with Terraform & CI/CD
+            </p>
+
+
+            <!-- METRICS -->
+
+            <div class="metrics">
+
+                <div class="metric">
+                    <span>☁️ AZURE CLOUD</span>
+                    <strong>ENTERPRISE READY</strong>
+                </div>
+
+                <div class="metric">
+                    <span>⚙️ TERRAFORM</span>
+                    <strong>IaC AUTOMATION</strong>
+                </div>
+
+                <div class="metric">
+                    <span>🚀 CI/CD</span>
+                    <strong>DELIVERY PIPELINES</strong>
+                </div>
+
+                <div class="metric">
+                    <span>🛡️ DEVSECOPS</span>
+                    <strong>SECURITY FIRST</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- NAVIGATION -->
+
+        <nav class="navigation">
+
+            <a href="#about">⭐ About Me</a>
+
+            <a href="#architecture">🏛️ Architecture</a>
+
+            <a href="#azure">☁️ Azure</a>
+
+            <a href="#iac">⚙️ IaC & CI/CD</a>
+
+            <a href="#security">🛡️ Security</a>
+
+            <a href="#projects">🚀 Projects</a>
+
+        </nav>
+
+
+        <!-- ABOUT -->
+
+        <section id="about">
+
+            <h2 class="section-title">
+                About Me
+            </h2>
+
+            <p class="about">
+
+                I am a DevOps and Azure Cloud Engineer with
+                13 years of overall IT experience, including
+                5+ years of hands-on experience in DevOps
+                and Cloud Engineering.
+
+                I specialize in Azure Cloud Infrastructure,
+                Terraform Infrastructure as Code,
+                CI/CD automation, Azure Landing Zones,
+                cloud governance, security and enterprise
+                infrastructure management.
+
+                My focus is on building scalable, secure,
+                automated and reliable cloud environments.
+
+            </p>
+
+        </section>
+
+
+        <!-- ARCHITECTURE -->
+
+        <section id="architecture">
+
+            <h2 class="section-title">
+                Enterprise Cloud Architecture
+            </h2>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>🏛️ Azure Landing Zones</h3>
+
+                    <p>
+                        Management Groups, Subscriptions,
+                        Azure Policy, RBAC and enterprise
+                        cloud governance.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🌐 Hub-Spoke Architecture</h3>
+
+                    <p>
+                        VNet Peering, Azure Firewall,
+                        Network Security Groups,
+                        Routing and Hybrid Connectivity.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🔄 High Availability & DR</h3>
+
+                    <p>
+                        Azure Backup, Site Recovery,
+                        Monitoring, Disaster Recovery
+                        and infrastructure reliability.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- AZURE SKILLS -->
+
+        <section id="azure">
+
+            <h2 class="section-title">
+                Azure Cloud Technologies
+            </h2>
+
+            <div class="skills">
+
+                <span class="skill">Azure Virtual Machines</span>
+
+                <span class="skill">Azure Networking</span>
+
+                <span class="skill">Virtual Networks</span>
+
+                <span class="skill">VNet Peering</span>
+
+                <span class="skill">Azure Bastion</span>
+
+                <span class="skill">Load Balancer</span>
+
+                <span class="skill">Application Gateway</span>
+
+                <span class="skill">Azure Firewall</span>
+
+                <span class="skill">Storage Accounts</span>
+
+                <span class="skill">Azure Key Vault</span>
+
+                <span class="skill">Private Endpoints</span>
+
+                <span class="skill">Azure Entra ID</span>
+
+                <span class="skill">RBAC & PIM</span>
+
+                <span class="skill">Azure Policy</span>
+
+                <span class="skill">Management Groups</span>
+
+                <span class="skill">Azure Monitor</span>
+
+                <span class="skill">Log Analytics</span>
+
+                <span class="skill">Azure Backup</span>
+
+                <span class="skill">Azure Site Recovery</span>
+
+                <span class="skill">AKS</span>
+
+                <span class="skill">Container Apps</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- TERRAFORM AND CICD -->
+
+        <section id="iac">
+
+            <h2 class="section-title">
+                Infrastructure as Code & CI/CD
+            </h2>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>⚙️ Terraform</h3>
+
+                    <p>
+                        Terraform Modules, Remote State,
+                        Backend Configuration, Variables,
+                        Outputs, Import, for_each,
+                        Infrastructure Provisioning
+                        and Drift Management.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🚀 Azure DevOps</h3>
+
+                    <p>
+                        YAML Pipelines, Azure Repos,
+                        Variable Groups, Service Connections,
+                        Self Hosted Agents and
+                        Multi-Stage CI/CD Pipelines.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🐙 GitHub & Jenkins</h3>
+
+                    <p>
+                        GitHub Actions, Jenkins,
+                        Git Workflow, Pull Requests,
+                        Branching Strategy and
+                        Automated Deployments.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🐳 Containers</h3>
+
+                    <p>
+                        Docker, Kubernetes, AKS,
+                        Container Images, Helm,
+                        Deployments and Container Security.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DEVSECOPS -->
+
+        <section id="security">
+
+            <h2 class="section-title">
+                DevSecOps & Security Tools
+            </h2>
+
+            <div class="skills">
+
+                <span class="skill">Checkov</span>
+
+                <span class="skill">tfsec</span>
+
+                <span class="skill">TFLint</span>
+
+                <span class="skill">SonarQube</span>
+
+                <span class="skill">TruffleHog</span>
+
+                <span class="skill">Gitleaks</span>
+
+                <span class="skill">Super-Linter</span>
+
+                <span class="skill">Secret Management</span>
+
+                <span class="skill">RBAC</span>
+
+                <span class="skill">Managed Identity</span>
+
+                <span class="skill">Service Principal</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- OTHER SKILLS -->
+
+        <section id="tools">
+
+            <h2 class="section-title">
+                Additional Technical Skills
+            </h2>
+
+            <div class="skills">
+
+                <span class="skill">Linux Administration</span>
+
+                <span class="skill">Bash Scripting</span>
+
+                <span class="skill">PowerShell</span>
+
+                <span class="skill">Python Basics</span>
+
+                <span class="skill">Git</span>
+
+                <span class="skill">Jira</span>
+
+                <span class="skill">ServiceNow</span>
+
+                <span class="skill">ITIL / ITSM</span>
+
+                <span class="skill">Agile / Scrum</span>
+
+            </div>
+
+        </section>
+
+
+        <!-- PROJECTS -->
+
+        <section id="projects">
+
+            <h2 class="section-title">
+                Featured Projects
+            </h2>
+
+            <div class="cards">
+
+                <div class="card">
+
+                    <h3>☁️ Azure Infrastructure Automation</h3>
+
+                    <p>
+                        Automated Azure resource provisioning
+                        using Terraform modules and Azure
+                        DevOps CI/CD pipelines.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🏛️ Enterprise Landing Zone</h3>
+
+                    <p>
+                        Enterprise cloud governance,
+                        subscription architecture,
+                        networking and security controls.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🛡️ DevSecOps Pipeline</h3>
+
+                    <p>
+                        Integrated infrastructure validation,
+                        security scanning, code quality checks
+                        and controlled deployments.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <h3>🚀 Multi-Environment CI/CD</h3>
+
+                    <p>
+                        Automated Dev, Test, UAT and
+                        Production deployments with
+                        approval gates and Terraform.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- CONTACT -->
+
+        <div class="contact">
+
+            <!-- Update these links with your real details -->
+
+            <a href="mailto:YOUR_EMAIL@example.com">
+                ✉ Email Me
+            </a>
+
+            <a href="https://www.linkedin.com/in/YOUR-LINKEDIN/"
+               target="_blank">
+                in LinkedIn
+            </a>
+
+            <a href="https://github.com/SamraChetan"
+               target="_blank">
+                🐙 GitHub
+            </a>
+
+        </div>
+
     </div>
-  </header>
 
-  <main>
-    <div class="intro">
-      <h2>Azure Cloud • DevOps • DevSecOps • IaC</h2>
-      <p class="tagline">▶ Building Secure, Scalable &amp; Automated Cloud Infrastructure</p>
 
-      <div class="metrics">
-        <div class="metric"><span>☁️ Azure Cloud</span><strong>Enterprise Ready</strong></div>
-        <div class="metric"><span>⚙️ Terraform IaC</span><strong>Automation</strong></div>
-        <div class="metric"><span>🚀 CI/CD</span><strong>Delivery Pipelines</strong></div>
-        <div class="metric"><span>🛡️ DevSecOps</span><strong>Security First</strong></div>
-      </div>
-    </div>
+    <!-- FOOTER -->
 
-    <nav class="nav-pills" aria-label="Page navigation">
-      <a href="#about">⭐ About Me</a>
-      <a href="#architecture">🏛️ Architecture</a>
-      <a href="#azure">☁️ Azure</a>
-      <a href="#iac">⚙️ IaC &amp; CI/CD</a>
-      <a href="#security">🛡️ Security</a>
-      <a href="#projects">🚀 Projects</a>
-    </nav>
+    <footer>
 
-    <section id="about">
-      <h2 class="section-title">About Me</h2>
-      <p class="about">
-        I am a DevOps and Azure Cloud Engineer with 13 years of overall IT experience,
-        including 5+ years of hands-on experience in DevOps and cloud engineering.
-        I focus on Azure infrastructure, Terraform-based automation, CI/CD pipelines,
-        cloud governance, secure deployments and operational reliability. I enjoy
-        designing repeatable solutions that make infrastructure delivery safer and faster.
-      </p>
-    </section>
+        <p>
+            Designed with ❤️ by Chetan Samra
+        </p>
 
-    <section id="architecture">
-      <h2 class="section-title">Cloud Architecture &amp; Governance</h2>
-      <div class="cards">
-        <article class="card"><h3>Azure Landing Zones</h3><p>Management groups, subscriptions, policy, RBAC and enterprise governance foundations.</p></article>
-        <article class="card"><h3>Hub-Spoke Networking</h3><p>VNet design, peering, routing, NSGs, Azure Firewall and hybrid connectivity concepts.</p></article>
-        <article class="card"><h3>Resilience &amp; Operations</h3><p>Monitoring, Log Analytics, backup, disaster recovery and operational reliability.</p></article>
-      </div>
-    </section>
+        <p>
+            Azure Cloud | DevOps | Terraform | DevSecOps
+        </p>
 
-    <section id="azure">
-      <h2 class="section-title">Azure Technologies</h2>
-      <div class="chips">
-        <span class="chip">Azure Virtual Network</span><span class="chip">Virtual Machines</span>
-        <span class="chip">Storage Accounts</span><span class="chip">Azure Bastion</span>
-        <span class="chip">Load Balancer</span><span class="chip">Application Gateway</span>
-        <span class="chip">Azure Firewall</span><span class="chip">Key Vault</span>
-        <span class="chip">Private Endpoint</span><span class="chip">Entra ID / RBAC</span>
-        <span class="chip">Azure Policy</span><span class="chip">Azure Monitor</span>
-        <span class="chip">Log Analytics</span><span class="chip">Backup &amp; ASR</span>
-        <span class="chip">AKS</span><span class="chip">Container Apps</span>
-      </div>
-    </section>
+        <p>
+            © 2026 Chetan Samra. All Rights Reserved.
+        </p>
 
-    <section id="iac">
-      <h2 class="section-title">Infrastructure as Code &amp; CI/CD</h2>
-      <div class="cards">
-        <article class="card"><h3>Terraform</h3><p>Reusable modules, remote state, variables, workspaces, plan/apply, imports and drift management.</p></article>
-        <article class="card"><h3>Azure DevOps</h3><p>YAML pipelines, repositories, variable groups, service connections and self-hosted agents.</p></article>
-        <article class="card"><h3>Delivery Toolchain</h3><p>GitHub Actions, Jenkins, Git, Docker, Kubernetes, Bash and PowerShell.</p></article>
-      </div>
-    </section>
+    </footer>
 
-    <section id="security">
-      <h2 class="section-title">DevSecOps &amp; Quality</h2>
-      <div class="chips">
-        <span class="chip">Checkov</span><span class="chip">tfsec</span>
-        <span class="chip">TFLint</span><span class="chip">SonarQube</span>
-        <span class="chip">TruffleHog</span><span class="chip">Gitleaks</span>
-        <span class="chip">Secret Management</span><span class="chip">Least Privilege</span>
-      </div>
-    </section>
-
-    <section id="projects">
-      <h2 class="section-title">Featured Projects</h2>
-      <div class="cards">
-        <article class="card"><h3>Azure Infrastructure Automation</h3><p>Terraform modules and CI/CD workflows for repeatable Azure resource provisioning.</p></article>
-        <article class="card"><h3>Enterprise Landing Zone Patterns</h3><p>Cloud governance, subscription structure, network segmentation and security controls.</p></article>
-        <article class="card"><h3>DevSecOps Pipeline</h3><p>Infrastructure validation, security scanning, review gates and controlled deployments.</p></article>
-      </div>
-    </section>
-
-    <div class="contact">
-      <!-- Replace the example links below with your real profile URLs and email. -->
-      <a href="mailto:YOUR_EMAIL@example.com">✉ Email</a>
-      <a href="https://www.linkedin.com/in/YOUR-LINKEDIN/" target="_blank" rel="noopener noreferrer">in LinkedIn</a>
-      <a href="https://github.com/SamraChetan" target="_blank" rel="noopener noreferrer">⌘ GitHub</a>
-    </div>
-  </main>
-
-  <footer>Designed with ☁️ by Chetan Samra · Azure | DevOps | Terraform | DevSecOps</footer>
 </body>
 </html>
-'''
-
-path = Path("/mnt/data/index.html")
-path.write_text(html, encoding="utf-8")
-print(f"Created: {path}")
